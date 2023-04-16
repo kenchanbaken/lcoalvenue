@@ -1,10 +1,8 @@
 const webdriver = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 const mysql = require('mysql2/promise');
-
 const options = new chrome.Options();
 options.addArguments('--headless');
-
 const driver = new webdriver.Builder()
   .forBrowser('chrome')
   .setChromeOptions(options)
@@ -31,6 +29,17 @@ venuIndex["高知"]=18;
 venuIndex["佐賀"]=19;
 var results = {};
 
+/*
+CREATE TABLE `calendar` (
+  `id` int(11) NOT NULL,
+  `race_date` date DEFAULT NULL,
+  `venue` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+ALTER TABLE `calendar`
+  ADD PRIMARY KEY (`id`);
+ALTER TABLE `calendar`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+*/
 
 function readVenuOnce(argVenu) {
   return new Promise(async (resolve, reject) => {
@@ -97,6 +106,7 @@ readVenuOnce('門別')
   .catch((error) => {
     console.error(error);
   });
+/*
 readVenuOnce('盛岡')
   .then((result) => {
     console.log(result);
@@ -213,4 +223,4 @@ readVenuOnce('佐賀')
   .catch((error) => {
     console.error(error);
   });
-
+*/
