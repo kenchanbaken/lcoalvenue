@@ -63,7 +63,7 @@ function readVenuOnce(argVenu) {
   });
 }
 const config = require('./config.js');
-const mysql = require('mysql2/promise');
+
 async function saveResultToMysql(results) {
   let connection;
   try {
@@ -89,7 +89,22 @@ async function saveResultToMysql(results) {
 
 
 
-
+readVenuOnce('門別')
+  .then((result) => {
+    console.log(result);
+    saveResultToMysql(result);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+readVenuOnce('盛岡')
+  .then((result) => {
+    console.log(result);
+    saveResultToMysql(result);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
 
 readVenuOnce('水沢')
   .then((result) => {
@@ -99,3 +114,103 @@ readVenuOnce('水沢')
   .catch((error) => {
     console.error(error);
   });
+readVenuOnce('浦和')
+  .then((result) => {
+    console.log(result);
+    saveResultToMysql(result);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+readVenuOnce('船橋')
+  .then((result) => {
+    console.log(result);
+    saveResultToMysql(result);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+
+readVenuOnce('大井')
+  .then((result) => {
+    console.log(result);
+    saveResultToMysql(result);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+readVenuOnce('川崎')
+  .then((result) => {
+    console.log(result);
+    saveResultToMysql(result);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+readVenuOnce('金沢')
+  .then((result) => {
+    console.log(result);
+    saveResultToMysql(result);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+readVenuOnce('笠松')
+  .then((result) => {
+    console.log(result);
+    saveResultToMysql(result);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+readVenuOnce('名古屋')
+  .then((result) => {
+    console.log(result);
+    saveResultToMysql(result);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+readVenuOnce('園田')
+  .then((result) => {
+    console.log(result);
+    saveResultToMysql(result);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+readVenuOnce('姫路')
+  .then((result) => {
+    console.log(result);
+    saveResultToMysql(result);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+readVenuOnce('高知')
+  .then((result) => {
+    console.log(result);
+    saveResultToMysql(result);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
+readVenuOnce('佐賀')
+  .then((result) => {
+    console.log(result);
+    saveResultToMysql(result);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
