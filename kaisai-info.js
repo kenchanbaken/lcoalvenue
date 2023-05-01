@@ -42,6 +42,24 @@ var venuPositionIndex = {
   "高知": 18,
   "佐賀": 19
 };
+var venuecodes = {
+  10: "盛岡",
+  11: "水沢",
+  18: "浦和",
+  19: "船橋",
+  20: "大井",
+  21: "川崎",
+  22: "金沢",
+  23: "笠松",
+  24: "名古屋",
+  25: "中京",
+  27: "園田",
+  28: "姫路",
+  31: "高知",
+  32: "佐賀",
+  36: "門別",
+  43: "岩手"
+};
 
 /**
  * readVenuOnce(venue)
@@ -89,7 +107,8 @@ async function saveResultToMysql(results) {
 
     for (const key of Object.keys(results)) {
       const venue = results[key];
-      await connection.execute('REPLACE INTO calendar (race_date, venue) VALUES (?, ?)', [key, venue]);
+      const code = Object.keys(venuecodes).find((key) => venuecodes[key] === venue);
+      await connection.execute('REPLACE INTO calendar (race_date, venucode, venue) VALUES (?, ?, ?)', [key, code, venue]);
     }
 
     await connection.commit();
