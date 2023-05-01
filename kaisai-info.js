@@ -1,28 +1,34 @@
 /**
  * kaisai-info.js
- * 
- * DDL
-  CREATE TABLE `calendar` (
-    `id` int(11) NOT NULL,
-    `race_date` date DEFAULT NULL,
-    `venue` varchar(255) DEFAULT NULL
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-  ALTER TABLE `calendar`
-    ADD PRIMARY KEY (`id`);
-  ALTER TABLE `calendar`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
-*/
+ */
 const webdriver = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 const mysql = require('mysql2/promise');
 const options = new chrome.Options();
-options.addArguments('--headless');
+options.addArguments('--headless', '--disable-cache');
+
 const driver = new webdriver.Builder()
   .forBrowser('chrome')
   .setChromeOptions(options)
   .build();
-// 当月の開催情報を取得する。このページにはデフォルトで当月分のみの情報が表示されます。
-driver.get('https://www.keiba.go.jp/KeibaWeb/MonthlyConveneInfo/MonthlyConveneInfoTop');
+  driver.manage().deleteAllCookies();
+// ページを開く前にキャッシュをクリアする
+driver.executeScript(() => {
+  // Cookieを削除する
+  document.cookie = '';
+  // キャッシュを削除する
+  caches.keys().then(function(names) {
+    for (let name of names)
+      caches.delete(name);
+  });
+});
+
+const currentYear = new Date().getFullYear();
+const currentMonth = new Date().getMonth() + 1;
+const url = `https://www.keiba.go.jp/KeibaWeb/MonthlyConveneInfo/MonthlyConveneInfoTop?k_year=${currentYear}&k_month=${currentMonth}`;
+driver.get(url);
+
+
 var venuPositionIndex = {
   //"帯広ば": 3,
   "門別": 4,
