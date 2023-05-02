@@ -1,6 +1,7 @@
 /**
  * kaisai-info.js
  */
+//const fs = require('fs');
 const webdriver = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 const mysql = require('mysql2/promise');
@@ -23,11 +24,19 @@ driver.executeScript(() => {
   });
 });
 
-const currentYear = new Date().getFullYear();
-const currentMonth = new Date().getMonth() + 1;
+//const currentYear = new Date().getFullYear();
+//const currentMonth = new Date().getMonth() + 1;
+
+
+const args = process.argv.slice(2);
+const year = args[0];
+const month = args[1];
+//const fileName = `${year}${month.toString().padStart(2, '0')}.html`;
+//const html = fs.readFileSync(fileName, 'utf-8');
+//driver.get(`file://${__dirname}/${fileName}`);
+
 const url = `https://www.keiba.go.jp/KeibaWeb/MonthlyConveneInfo/MonthlyConveneInfoTop?k_year=${currentYear}&k_month=${currentMonth}`;
 driver.get(url);
-
 
 var venuPositionIndex = {
   //"帯広ば": 3,
@@ -88,7 +97,8 @@ async function readVenuOnce(venue) {
       var elem = await driver.findElement(webdriver.By.xpath(wkString));
       var text = await elem.getText();
       if ((text.includes('●')) || (text.includes('D')) || (text.includes('☆'))) {
-        var key = "202304" + ("0" + (i)).slice(-2);
+        //var key = "202304" + ("0" + (i)).slice(-2);
+        var key = year + ("0" + month).slice(-2) + ("0" + (i + 1)).slice(-2);
         results[key] = venue;
       }
     }
