@@ -1,7 +1,7 @@
 /**
  * kaisai-info.js
+ * how to  start: node kaisai-info.js 2023 05
  */
-//const fs = require('fs');
 const webdriver = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
 const mysql = require('mysql2/promise');
@@ -35,7 +35,7 @@ const month = args[1];
 //const html = fs.readFileSync(fileName, 'utf-8');
 //driver.get(`file://${__dirname}/${fileName}`);
 
-const url = `https://www.keiba.go.jp/KeibaWeb/MonthlyConveneInfo/MonthlyConveneInfoTop?k_year=${currentYear}&k_month=${currentMonth}`;
+const url = `https://www.keiba.go.jp/KeibaWeb/MonthlyConveneInfo/MonthlyConveneInfoTop?k_year=${year}&k_month=${month}`;
 driver.get(url);
 
 var venuPositionIndex = {
@@ -96,9 +96,8 @@ async function readVenuOnce(venue) {
       var wkString = xpathDays[i];
       var elem = await driver.findElement(webdriver.By.xpath(wkString));
       var text = await elem.getText();
-      if ((text.includes('●')) || (text.includes('D')) || (text.includes('☆'))) {
-        //var key = "202304" + ("0" + (i)).slice(-2);
-        var key = year + ("0" + month).slice(-2) + ("0" + (i + 1)).slice(-2);
+      if ((text.includes('●')) || (text.includes('Ｄ')) || (text.includes('☆'))) {
+        var key = year + ("0" + month).slice(-2) + ("0" + (i + 0)).slice(-2);
         results[key] = venue;
       }
     }
