@@ -1,5 +1,6 @@
 // how to start
-// node api-todays-venue.js & start http://localhost:3000
+//   1.command prompt > node api-todays-venue.js &
+//   2.browser http://localhost:3000
 // how to shutdown 
 // Stop-Job -Id 1
 const express = require('express');
@@ -26,12 +27,14 @@ connection.connect((error) => {
 });
 
 // 本日の日付を取得
-const today = moment().format('YYYY-MM-DD');
+//const today = moment().format('YYYY-MM-DD');
+let today = moment().format('YYYY-MM-DD');
 
-// 本日の開催レースコードを取得するAPI
-app.get('/api-todays-venue', (req, res) => {
+// 日付を指定して開催レースコードを取得するAPI
+app.get('/api-venue/:date', (req, res) => {
+  const date = moment(req.params.date).format('YYYY-MM-DD');
   const query = 'SELECT venucode FROM calendar WHERE race_date = ?';
-  connection.query(query, [today], (error, results) => {
+  connection.query(query, [date], (error, results) => {
     if (error) {
       console.log('MySQL query error:', error);
       throw error;
