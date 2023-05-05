@@ -14,14 +14,12 @@ module.exports = {
 CREATE DATABASE localkeiba CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 
 # tableを作成します。
-see localkeiba.sql
-
+localkeiba.sql
 # 1.今月の開催情報をDBに登録します。
 node kaisai-info.js
-# 2.本日開催されるレース会場をサーバーAPIとして起動します。
+# 2.開催情報をAPIとして起動します。
 node api-todays-venue.js &
-# 3.本日開催されるレース会場をjsonで返します。
-http://localhost:3000
-# 4.上記を元に各会場のレース数をDBに登録します。
+# 3.本日開催されるレース情報をDBに登録します。
+save-race-count-by-date.js yyyymmdd
 
 
