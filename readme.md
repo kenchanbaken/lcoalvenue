@@ -1,4 +1,4 @@
-# 地方競馬(ばんえい意外）の開催情報をDBに保存します。
+# 地方競馬(サラ系）の予想プログラムです。
 # src
 git clone 'https://github.com/kenchanbaken/todo_app_php_v4-master.git'
 # node.js v18.16.0
