@@ -1,6 +1,6 @@
 // how to start
 //   1.command prompt > node api-todays-venue.js &
-//   2.browser http://localhost:3000
+//   2.browser args yyyy-mm-dd  http://localhost:3000/api-venue/2023-05-05
 // how to shutdown 
 // Stop-Job -Id 1
 const express = require('express');
