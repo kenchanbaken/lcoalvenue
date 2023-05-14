@@ -1,8 +1,11 @@
-// how to start
-//   1.command prompt > node api-todays-venue.js &
-//   2.browser args yyyy-mm-dd  http://localhost:3000/api-venue/2023-05-05
-// how to shutdown 
-// Stop-Job -Id 1
+
+/**
+* @api {get} /api-venue/:date 本日の日付を指定して開催レースコードを取得するAPI
+*   1.command prompt > node api-todays-venue.js &
+*   2.browser args yyyy-mm-dd  http://localhost:3000/api-venue/2023-05-05
+*   3.how to shutdown 
+*     Stop-Job -Id 1
+*/
 const express = require('express');
 const mysql = require('mysql');
 const moment = require('moment');
@@ -32,7 +35,13 @@ let today = moment().format('YYYY-MM-DD');
 
 // 日付を指定して開催レースコードを取得するAPI
 app.get('/api-venue/:date', (req, res) => {
-  const date = moment(req.params.date).format('YYYY-MM-DD');
+  var newLocal = req.params.date;
+// validation newLocal 
+if (!moment(newLocal).isValid()) {
+  res.status(400).send('Invalid date format');
+  return;
+}
+  const date = moment(newLocal).format('YYYY-MM-DD');
   const query = 'SELECT venucode FROM calendar WHERE race_date = ?';
   connection.query(query, [date], (error, results) => {
     if (error) {

@@ -79,7 +79,9 @@ CREATE TABLE `race_cnt` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE `race_card` (
+
+-- racing_form
+CREATE TABLE `racing_form` (
   `id` varchar(12) NOT NULL,
   `frame_number` int not null DEFAULT 0,
   `horse_number` int not null DEFAULT 0,
