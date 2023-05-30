@@ -29,21 +29,19 @@ connection.connect((error) => {
   console.log('Connected to MySQL');
 });
 
-// 本日の日付を取得
-//const today = moment().format('YYYY-MM-DD');
-let today = moment().format('YYYY-MM-DD');
+app.get('/api-venue/:date?', (req, res) => {
+  // 対象日を取得
+  let targetDay = req.params.date ? moment(req.params.date) : moment();
 
-// 日付を指定して開催レースコードを取得するAPI
-app.get('/api-venue/:date', (req, res) => {
-  var newLocal = req.params.date;
-// validation newLocal 
-if (!moment(newLocal).isValid()) {
-  res.status(400).send('Invalid date format');
-  return;
-}
-  const date = moment(newLocal).format('YYYY-MM-DD');
+  // バリデーション
+  if (!targetDay.isValid()) {
+    res.status(400).send('Invalid date format');
+    return;
+  }
+
+  const formattedDate = targetDay.format('YYYY-MM-DD');
   const query = 'SELECT venucode FROM calendar WHERE race_date = ?';
-  connection.query(query, [date], (error, results) => {
+  connection.query(query, [formattedDate], (error, results) => {
     if (error) {
       console.log('MySQL query error:', error);
       throw error;

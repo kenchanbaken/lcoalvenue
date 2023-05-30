@@ -1,7 +1,6 @@
 /*
 * save-race-count-by-date.js
 * @auther kenchanbaken@gmail.com
-* spec:
 * save-race-count-by-date.js yyyymmdd
 * 1.CALL api-todays-venu.js
 * http://localhost:3000/api-venue/yyyy-mm-dd
