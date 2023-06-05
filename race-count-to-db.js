@@ -1,6 +1,7 @@
 /**
- * 
- * node race-count-to-db.js 2023051431
+ * race-count-to-db.js
+ * どの競馬場で何レースあるのかを取得してDBに保存する
+ * node race-count-to-db.js 20230605
  */
 const webdriver = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
@@ -24,7 +25,7 @@ driver.executeScript(() => {
   });
 });
 
-async function getRaceCount(url) {
+async function getRaceCountFromURL(url) {
   await driver.get(url);
   const tables = await driver.findElements(webdriver.By.css('table'));
   const raceListTable = tables[0]; // 一番最初のtable要素を取得
@@ -48,7 +49,7 @@ async function main() {
   const encodedRaceDate = encodeURIComponent(raceDate).replace(/%20/g, '%2f');
   const url = `https://www.keiba.go.jp/KeibaWeb/TodayRaceInfo/RaceList?k_raceDate=${encodedRaceDate}&k_babaCode=${venuCode}`;
   console.log(url);
-  const raceCount = await getRaceCount(url);
+  const raceCount = await getRaceCountFromURL(url);
   console.log(`Race count: ${raceCount}`);
   const id = yyyymmdd + venuCode;
   await saveResultToMysql(id, raceCount);
@@ -78,8 +79,6 @@ async function saveResultToMysql(id,cnt) {
     }
   }
 }
-
-
 main()
   .then(() => driver.quit())
   .catch((err) => {

@@ -1,6 +1,6 @@
 /**
  * kaisai-info.js
- * how to  start: node kaisai-info.js 2023 05
+ * how to  start: node kaisai-info.js 2023 06
  */
 const webdriver = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
@@ -23,17 +23,9 @@ driver.executeScript(() => {
       caches.delete(name);
   });
 });
-
-//const currentYear = new Date().getFullYear();
-//const currentMonth = new Date().getMonth() + 1;
-
-
 const args = process.argv.slice(2);
 const year = args[0];
 const month = args[1];
-//const fileName = `${year}${month.toString().padStart(2, '0')}.html`;
-//const html = fs.readFileSync(fileName, 'utf-8');
-//driver.get(`file://${__dirname}/${fileName}`);
 
 const url = `https://www.keiba.go.jp/KeibaWeb/MonthlyConveneInfo/MonthlyConveneInfoTop?k_year=${year}&k_month=${month}`;
 driver.get(url);
@@ -171,5 +163,3 @@ Promise.all([
 .catch((error) => {
   console.error(error);
 });
-
-
