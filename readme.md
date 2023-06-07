@@ -1,6 +1,6 @@
 # 地方競馬(サラ系）の予想プログラムです。
 # src
-git clone 'https://github.com/kenchanbaken/todo_app_php_v4-master.git'
+git clone 'https://github.com/kenchanbaken/localvenue.git'
 # node.js v18.16.0
 npm install
 # config.jsを手動で作成します。
