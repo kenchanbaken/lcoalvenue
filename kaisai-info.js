@@ -23,18 +23,14 @@ driver.executeScript(() => {
       caches.delete(name);
   });
 });
-
-//const currentYear = new Date().getFullYear();
-//const currentMonth = new Date().getMonth() + 1;
-
-
 const args = process.argv.slice(2);
 const year = args[0];
 const month = args[1];
-//const fileName = `${year}${month.toString().padStart(2, '0')}.html`;
-//const html = fs.readFileSync(fileName, 'utf-8');
-//driver.get(`file://${__dirname}/${fileName}`);
-
+if (!year || !month) {
+  console.error('Error: The year and month arguments are required.');
+  console.log('Usage: node kaisai-info.js [year] [month]');
+  process.exit(1);
+}
 const url = `https://www.keiba.go.jp/KeibaWeb/MonthlyConveneInfo/MonthlyConveneInfoTop?k_year=${year}&k_month=${month}`;
 driver.get(url);
 
