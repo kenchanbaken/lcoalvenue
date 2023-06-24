@@ -31,7 +31,6 @@ const url = `https://www.keiba.go.jp/KeibaWeb/MonthlyConveneInfo/MonthlyConveneI
 driver.get(url);
 
 var venuPositionIndex = {
-  //"帯広ば": 3,
   "門別": 4,
   "札幌": 5,
   "盛岡": 6,
