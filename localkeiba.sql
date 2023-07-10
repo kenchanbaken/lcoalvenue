@@ -72,14 +72,6 @@ ALTER TABLE `race_cnt`
 COMMIT;
 
 
-
-CREATE TABLE `race_cnt` (
-  `id` varchar(10) NOT NULL,
-  `cnt` int(11) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
 -- racing_form
 CREATE TABLE `racing_form` (
   `id` varchar(12) NOT NULL,

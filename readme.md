@@ -12,6 +12,7 @@ module.exports = {
 }
 # MySQL
 CREATE DATABASE localkeiba CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
+grant ALL on *.* to YOURE_USER_NAME@localhost IDENTIFIED BY "YOURE_PASS";
 
 # tableを作成します。
 localkeiba.sql
